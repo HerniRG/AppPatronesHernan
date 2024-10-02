@@ -9,7 +9,8 @@ import UIKit
 
 final class LoginBuilder {
     func build() -> UIViewController {
-        let viewModel = LoginViewModel()
+        let loginUseCase = LoginUseCase()
+        let viewModel = LoginViewModel(useCase: loginUseCase)
         let viewController = LoginViewController(viewModel: viewModel)
         viewController.modalPresentationStyle = .fullScreen
         viewController.modalTransitionStyle = .crossDissolve

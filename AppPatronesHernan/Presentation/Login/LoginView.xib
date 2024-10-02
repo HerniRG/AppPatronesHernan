@@ -31,7 +31,7 @@
                     <rect key="frame" x="24" y="315.33333333333331" width="345" height="246.66666666666669"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FYt-h6-DZh">
-                            <rect key="frame" x="20" y="20" width="305" height="206.66666666666663"/>
+                            <rect key="frame" x="20" y="20" width="305" height="206.66666666666666"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SH5-rH-bse">
                                     <rect key="frame" x="0.0" y="0.0" width="305" height="34"/>
@@ -55,7 +55,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fru-Mc-M4n">
                                     <rect key="frame" x="0.0" y="172.33333333333337" width="305" height="34.333333333333343"/>
                                     <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="filled" title="Login">
+                                        <color key="baseBackgroundColor" systemColor="systemOrangeColor"/>
+                                    </buttonConfiguration>
                                     <connections>
                                         <action selector="onLoginButtonTapped:" destination="-1" eventType="touchUpInside" id="aGi-EU-dbj"/>
                                     </connections>
@@ -90,6 +92,9 @@
         <image name="background" width="1080" height="1920"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
