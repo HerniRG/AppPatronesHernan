@@ -6,14 +6,44 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeroTableViewCell" customModule="AppPatronesHernan" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeroTableViewCell" customModule="AppPatronesHernan" customModuleProvider="target">
+            <connections>
+                <outlet property="avatar" destination="ojq-gJ-Uj2" id="s22-5V-0v7"/>
+                <outlet property="heroName" destination="JKI-YF-PZb" id="vNq-rl-z7u"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="176" id="kQu-cv-chi">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="kQu-cv-chi">
             <rect key="frame" x="0.0" y="0.0" width="478" height="176"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kQu-cv-chi" id="so7-ey-1eg">
                 <rect key="frame" x="0.0" y="0.0" width="478" height="176"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="uRW-l8-8mC">
+                        <rect key="frame" x="16" y="12" width="446" height="152"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ojq-gJ-Uj2" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="152" height="152"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="ojq-gJ-Uj2" secondAttribute="height" multiplier="1:1" id="Scm-cJ-lhj"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKI-YF-PZb">
+                                <rect key="frame" x="168" y="0.0" width="278" height="152"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="uRW-l8-8mC" firstAttribute="leading" secondItem="so7-ey-1eg" secondAttribute="leading" constant="16" id="Bc5-FD-fPc"/>
+                    <constraint firstItem="uRW-l8-8mC" firstAttribute="top" secondItem="so7-ey-1eg" secondAttribute="top" constant="12" id="DNg-eG-I9l"/>
+                    <constraint firstAttribute="bottom" secondItem="uRW-l8-8mC" secondAttribute="bottom" constant="12" id="XYR-tV-bne"/>
+                    <constraint firstAttribute="trailing" secondItem="uRW-l8-8mC" secondAttribute="trailing" constant="16" id="kyN-ZA-4oT"/>
+                </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-551.14503816793888" y="-81.690140845070431"/>
         </tableViewCell>

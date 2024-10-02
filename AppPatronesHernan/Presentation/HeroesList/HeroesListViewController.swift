@@ -8,9 +8,10 @@
 import UIKit
 
 final class HeroesListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
     @IBOutlet private weak var tableView: UITableView!
-    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var errorContainer: UIStackView!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     @IBOutlet private weak var errorLabel: UILabel!
     
     private let viewModel: HeroesListViewModel
@@ -36,8 +37,8 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func onRetryTapped(_ sender: Any) {
-        
     }
+    
     
     // MARK: - States
     private func bind() {
