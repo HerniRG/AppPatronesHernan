@@ -21,29 +21,32 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
                     <rect key="frame" x="16" y="75" width="361" height="727"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-yv-G4D" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="361" height="120"/>
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="250"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="120" id="x81-mX-F8E"/>
+                                <constraint firstAttribute="height" constant="250" id="x81-mX-F8E"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
-                            <rect key="frame" x="0.0" y="120" width="361" height="607"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
+                            <rect key="frame" x="0.0" y="250" width="361" height="477"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="LuC-yv-G4D" firstAttribute="top" secondItem="4F8-bH-U6Y" secondAttribute="top" id="V5t-du-V68"/>
-                        <constraint firstAttribute="trailing" secondItem="LuC-yv-G4D" secondAttribute="trailing" id="g2T-CV-Vv7"/>
-                        <constraint firstItem="LuC-yv-G4D" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="khv-4I-Zm7"/>
+                        <constraint firstItem="uHH-9r-KrD" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="JDB-HW-6hW"/>
+                        <constraint firstItem="uHH-9r-KrD" firstAttribute="top" secondItem="LuC-yv-G4D" secondAttribute="bottom" id="buO-qA-lRt"/>
+                        <constraint firstItem="LuC-yv-G4D" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="c7h-MS-it9"/>
+                        <constraint firstItem="LuC-yv-G4D" firstAttribute="top" secondItem="4F8-bH-U6Y" secondAttribute="top" id="f79-Df-O40"/>
+                        <constraint firstAttribute="trailing" secondItem="uHH-9r-KrD" secondAttribute="trailing" id="jPA-Bv-quR"/>
+                        <constraint firstAttribute="trailing" secondItem="LuC-yv-G4D" secondAttribute="trailing" id="zML-9N-PG7"/>
                     </constraints>
                 </stackView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
                     <rect key="frame" x="122.66666666666667" y="783.66666666666663" width="147.66666666666663" height="34.333333333333371"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Transformations"/>
