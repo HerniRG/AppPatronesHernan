@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeroDetailsViewController" customModule="AppPatronesHernan" customModuleProvider="target">
+            <connections>
+                <outlet property="heroDescription" destination="uHH-9r-KrD" id="unu-vt-o2s"/>
+                <outlet property="heroImage" destination="LuC-yv-G4D" id="6Rv-kS-ap6"/>
+                <outlet property="transformationsButton" destination="K2I-Qt-UV1" id="kHB-49-oHN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
+                    <rect key="frame" x="16" y="75" width="361" height="727"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-yv-G4D" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="361" height="120"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="120" id="x81-mX-F8E"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
+                            <rect key="frame" x="0.0" y="120" width="361" height="607"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="LuC-yv-G4D" firstAttribute="top" secondItem="4F8-bH-U6Y" secondAttribute="top" id="V5t-du-V68"/>
+                        <constraint firstAttribute="trailing" secondItem="LuC-yv-G4D" secondAttribute="trailing" id="g2T-CV-Vv7"/>
+                        <constraint firstItem="LuC-yv-G4D" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="khv-4I-Zm7"/>
+                    </constraints>
+                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
+                    <rect key="frame" x="122.66666666666667" y="783.66666666666663" width="147.66666666666663" height="34.333333333333371"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="filled" title="Transformations"/>
+                    <connections>
+                        <action selector="onTransformationButtonTapped:" destination="-1" eventType="touchUpInside" id="7qa-vR-WPd"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="K2I-Qt-UV1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6Tl-ba-RNZ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="K2I-Qt-UV1" secondAttribute="bottom" id="K16-rw-z9I"/>
+                <constraint firstItem="4F8-bH-U6Y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="OiS-zZ-KVD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4F8-bH-U6Y" secondAttribute="trailing" constant="16" id="PVG-fq-pEi"/>
+                <constraint firstItem="4F8-bH-U6Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="S9N-60-qW5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4F8-bH-U6Y" secondAttribute="bottom" constant="16" id="ZZx-th-F3c"/>
+            </constraints>
+            <point key="canvasLocation" x="-91" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

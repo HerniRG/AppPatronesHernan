@@ -13,8 +13,8 @@ final class HeroTableViewCell: UITableViewCell {
     
 
     @IBOutlet weak var avatar: AsyncImageView!
-    @IBOutlet weak var heroName: UILabel!
     
+    @IBOutlet weak var heroName: UILabel!
     override func prepareForReuse() {
         super.prepareForReuse()
         avatar.cancel()

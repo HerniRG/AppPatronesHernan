@@ -79,7 +79,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        90
+        120
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,6 +93,10 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Hello world")
+        let heroDetailsViewController = HeroeDetailsBuilder().build(with: viewModel.heroes[indexPath.row])
+        
+        navigationController?.pushViewController(heroDetailsViewController, animated: true)
     }
+
+
 }
