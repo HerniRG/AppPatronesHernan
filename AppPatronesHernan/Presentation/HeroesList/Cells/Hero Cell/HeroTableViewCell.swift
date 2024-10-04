@@ -12,12 +12,14 @@ final class HeroTableViewCell: UITableViewCell {
     static var nib: UINib { UINib(nibName: "HeroTableViewCell", bundle: Bundle(for: HeroTableViewCell.self)) }
     
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var avatar: AsyncImageView!
     @IBOutlet weak var heroName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupAvatar()
+        setupContainerView()
     }
     
     override func prepareForReuse() {
@@ -40,4 +42,17 @@ final class HeroTableViewCell: UITableViewCell {
         avatar.layer.borderWidth = 1.0
         avatar.layer.borderColor = UIColor.gray.cgColor
     }
+    
+    private func setupContainerView() {
+        containerView.layer.cornerRadius = 8
+        containerView.layer.masksToBounds = true
+        containerView.layer.borderWidth = 1.0
+        containerView.layer.borderColor = UIColor.lightGray.cgColor
+        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowOpacity = 0.2
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        containerView.layer.shadowRadius = 4
+        containerView.backgroundColor = UIColor.white
+    }
+    
 }

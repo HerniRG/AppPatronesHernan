@@ -38,6 +38,8 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     @IBAction func onRetryTapped(_ sender: Any) {
+        renderLoading()
+        viewModel.load()
     }
     
     
@@ -95,9 +97,10 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let heroDetailsViewController = HeroeDetailsBuilder(id: viewModel.heroes[indexPath.row].identifier).build()
-        
-        navigationController?.pushViewController(heroDetailsViewController, animated: true)
+        self.navigationController?.pushViewController(heroDetailsViewController, animated: true)
     }
+
+
 
 
 }

@@ -20,6 +20,7 @@ final class HeroeDetailsBuilder {
         let viewModel = HeroDetailsViewModel(id: id, getHeroUseCase: getHeroUseCase, getTransformationUseCase: getTransformationUseCase)
         let viewController = HeroDetailsViewController(viewModel: viewModel)
         
+        // Retornar solo el ViewController
         return viewController
     }
 }

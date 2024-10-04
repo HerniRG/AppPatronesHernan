@@ -28,9 +28,9 @@ class HeroDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar(title: "Loading...", backgroundColor: .systemIndigo)
+        configureNavigationBar(title: nil, backgroundColor: .systemIndigo)
         configureHeroDetails()
-        viewModel.loadHeroDetails()  // Ahora se carga el héroe y las transformaciones
+        viewModel.loadHeroDetails()
         bind()
     }
     
@@ -79,25 +79,43 @@ class HeroDetailsViewController: UIViewController {
     
     private func renderSuccess() {
         spinner.stopAnimating()
-        updateHeroDetails()
-        heroDescription.isHidden = false
-        heroImage.isHidden = false
-        transformationsButton.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.updateHeroDetails()
+            self.heroDescription.isHidden = false
+            self.heroImage.isHidden = false
+            self.transformationsButton.isHidden = false
+        })
+        
+        UIView.animate(withDuration: 0.3) {
+            self.configureNavigationBar(title: self.viewModel.hero?.name, backgroundColor: .systemIndigo)
+        }
     }
     
     private func renderNoButton() {
         spinner.stopAnimating()
-        updateHeroDetails()
-        transformationsButton.isHidden = true
-        heroDescription.isHidden = false
-        heroImage.isHidden = false
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.updateHeroDetails()
+            self.transformationsButton.isHidden = true
+            self.heroDescription.isHidden = false
+            self.heroImage.isHidden = false
+        })
+        
+        UIView.animate(withDuration: 0.3) {
+            self.configureNavigationBar(title: self.viewModel.hero?.name, backgroundColor: .systemIndigo)
+        }
     }
     
     private func showLoadingState() {
-        heroDescription.isHidden = true
-        heroImage.isHidden = true
-        transformationsButton.isHidden = true
+        UIView.animate(withDuration: 0.3) {
+            self.heroDescription.isHidden = true
+            self.heroImage.isHidden = true
+            self.transformationsButton.isHidden = true
+        }
+        
         spinner.startAnimating()
     }
+    
     
 }
