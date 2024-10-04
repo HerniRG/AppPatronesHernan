@@ -8,13 +8,18 @@
 import UIKit
 
 final class HeroeDetailsBuilder {
+    private let id: String
     
-    func build(with hero: Hero) -> UIViewController {
-        let useCase = GetTransformationUseCase()
-        let viewModel = HeroDetailsViewModel(hero: hero, useCase: useCase)
+    init(id: String) {
+        self.id = id
+    }
+
+    func build() -> UIViewController {
+        let getHeroUseCase = GetSingleHeroUseCase()
+        let getTransformationUseCase = GetTransformationUseCase()
+        let viewModel = HeroDetailsViewModel(id: id, getHeroUseCase: getHeroUseCase, getTransformationUseCase: getTransformationUseCase)
         let viewController = HeroDetailsViewController(viewModel: viewModel)
         
         return viewController
     }
 }
-

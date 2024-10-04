@@ -94,7 +94,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let heroDetailsViewController = HeroeDetailsBuilder().build(with: viewModel.heroes[indexPath.row])
+        let heroDetailsViewController = HeroeDetailsBuilder(id: viewModel.heroes[indexPath.row].identifier).build()
         
         navigationController?.pushViewController(heroDetailsViewController, animated: true)
     }

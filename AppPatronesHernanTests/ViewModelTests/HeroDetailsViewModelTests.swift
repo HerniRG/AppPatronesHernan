@@ -8,9 +8,21 @@
 @testable import AppPatronesHernan
 import XCTest
 
+private final class SuccessGetHeroUseCaseMock: GetSingleHeroUseCaseContract {
+    func execute(heroId: String, completion: @escaping (Result<Hero, Error>) -> Void) {
+        let hero = Hero(identifier: "1", name: "Goku", description: "Saiyan warrior", photo: "goku.jpg", favorite: false)
+        completion(.success(hero))
+    }
+}
+
+private final class FailedGetHeroUseCaseMock: GetSingleHeroUseCaseContract {
+    func execute(heroId: String, completion: @escaping (Result<Hero, Error>) -> Void) {
+        completion(.failure(APIErrorResponse.network("hero-fail")))
+    }
+}
+
 private final class SuccessGetTransformationUseCaseMock: GetTransformationUseCaseContract {
     var returnEmptyTransformations = false
-
     func execute(heroId: String, completion: @escaping (Result<[Transformation], Error>) -> Void) {
         if returnEmptyTransformations {
             completion(.success([]))
@@ -28,51 +40,51 @@ private final class FailedGetTransformationUseCaseMock: GetTransformationUseCase
 }
 
 final class HeroDetailsViewModelTests: XCTestCase {
-    
+
     func testSuccessScenario() {
-        let successExpectation = expectation(description: "Success")
-        let sut = HeroDetailsViewModel(hero: Hero(identifier: "1", name: "Goku", description: "", photo: "", favorite: false), useCase: SuccessGetTransformationUseCaseMock())
+        let expectation = self.expectation(description: "Success")
+        let sut = HeroDetailsViewModel(id: "1", getHeroUseCase: SuccessGetHeroUseCaseMock(), getTransformationUseCase: SuccessGetTransformationUseCaseMock())
         
         sut.onStateChanged.bind { state in
             if state == .success {
-                successExpectation.fulfill()
+                expectation.fulfill()
             }
         }
         
-        sut.loadTransformation()
+        sut.loadHeroDetails()
         waitForExpectations(timeout: 5)
         XCTAssertEqual(sut.transformations.count, 1)
+        XCTAssertEqual(sut.hero?.name, "Goku")
     }
     
     func testNoTransformationsScenario() {
-        let noButtonExpectation = expectation(description: "NoButton")
-        let useCaseMock = SuccessGetTransformationUseCaseMock()
-        useCaseMock.returnEmptyTransformations = true  // Simulamos que no hay transformaciones
-
-        let sut = HeroDetailsViewModel(hero: Hero(identifier: "1", name: "Goku", description: "", photo: "", favorite: false), useCase: useCaseMock)
+        let expectation = self.expectation(description: "NoButton")
+        let transformationMock = SuccessGetTransformationUseCaseMock()
+        transformationMock.returnEmptyTransformations = true
+        let sut = HeroDetailsViewModel(id: "1", getHeroUseCase: SuccessGetHeroUseCaseMock(), getTransformationUseCase: transformationMock)
         
         sut.onStateChanged.bind { state in
             if state == .noButton {
-                noButtonExpectation.fulfill()
+                expectation.fulfill()
             }
         }
         
-        sut.loadTransformation()
+        sut.loadHeroDetails()
         waitForExpectations(timeout: 5)
         XCTAssertEqual(sut.transformations.count, 0)
     }
     
     func testFailureScenario() {
-        let errorExpectation = expectation(description: "Error")
-        let sut = HeroDetailsViewModel(hero: Hero(identifier: "1", name: "Goku", description: "", photo: "", favorite: false), useCase: FailedGetTransformationUseCaseMock())
+        let expectation = self.expectation(description: "Error")
+        let sut = HeroDetailsViewModel(id: "1", getHeroUseCase: FailedGetHeroUseCaseMock(), getTransformationUseCase: FailedGetTransformationUseCaseMock())
         
         sut.onStateChanged.bind { state in
-            if state == .noButton {
-                errorExpectation.fulfill()
+            if state == .error {
+                expectation.fulfill()
             }
         }
         
-        sut.loadTransformation()
+        sut.loadHeroDetails()
         waitForExpectations(timeout: 5)
         XCTAssertEqual(sut.transformations.count, 0)
     }

@@ -10,42 +10,54 @@ import Foundation
 enum HeroDetailsState {
     case success
     case noButton
+    case loading
+    case error
 }
 
 final class HeroDetailsViewModel {
     let onStateChanged = Binding<HeroDetailsState>()
-    private let hero: Hero
-    private let useCase: GetTransformationUseCaseContract
+    private let id: String
+    private let getHeroUseCase: GetSingleHeroUseCaseContract
+    private let getTransformationUseCase: GetTransformationUseCaseContract
+    private(set) var hero: Hero?
     private(set) var transformations: [Transformation] = []
     
-    init(hero: Hero, useCase: GetTransformationUseCaseContract) {
-        self.hero = hero
-        self.useCase = useCase
+    init(id: String, getHeroUseCase: GetSingleHeroUseCaseContract, getTransformationUseCase: GetTransformationUseCaseContract) {
+        self.id = id
+        self.getHeroUseCase = getHeroUseCase
+        self.getTransformationUseCase = getTransformationUseCase
     }
     
-    var heroModel: Hero {
-        return hero
-    }
-    
-    func loadTransformation() {
-        useCase.execute(heroId: hero.identifier) { [weak self] result in
+    func loadHeroDetails() {
+        onStateChanged.update(newValue: .loading)
+        
+        // Obtenemos el héroe por id
+        getHeroUseCase.execute(heroId: id) { [weak self] result in
             switch result {
-            case .success(let transformations):
-                self?.transformations = transformations
-                
-                // Verificar si hay alguna transformación para el héroe actual
-                if !transformations.isEmpty {
-                    print("Hero has transformations.") // Asegúrate de que esta línea se ejecute
-                    self?.onStateChanged.update(newValue: .success)
-                } else {
-                    print("Hero does not have transformations.")
-                    self?.onStateChanged.update(newValue: .noButton)
-                }
-            case .failure(let error):
-                print("Error al cargar transformaciones: \(error.localizedDescription)")
-                self?.onStateChanged.update(newValue: .noButton)
+            case .success(let hero):
+                self?.hero = hero
+                self?.loadTransformations()
+            case .failure:
+                self?.onStateChanged.update(newValue: .error)
             }
         }
     }
-
+    
+    private func loadTransformations() {
+        guard let hero = hero else { return }
+        
+        getTransformationUseCase.execute(heroId: hero.identifier) { [weak self] result in
+            switch result {
+            case .success(let transformations):
+                self?.transformations = transformations
+                if !transformations.isEmpty {
+                    self?.onStateChanged.update(newValue: .success)
+                } else {
+                    self?.onStateChanged.update(newValue: .noButton)
+                }
+            case .failure:
+                self?.onStateChanged.update(newValue: .error)
+            }
+        }
+    }
 }
