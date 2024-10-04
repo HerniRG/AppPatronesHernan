@@ -53,22 +53,31 @@ final class LoginViewController: UIViewController {
     
     // MARK: - State rendering functions
     private func renderSuccess() {
-        signInButton.isHidden = false
-        spinner.stopAnimating()
-        errorLabel.isHidden = true
+        UIView.animate(withDuration: 0.6) {
+            self.signInButton.isHidden = true
+            self.spinner.stopAnimating()
+            self.errorLabel.isHidden = true
+            self.containerView.isHidden = true
+        }
     }
     
     private func renderError(_ reason: String) {
-        signInButton.isHidden = false
-        spinner.stopAnimating()
-        errorLabel.isHidden = false
-        errorLabel.text = reason
+        UIView.animate(withDuration: 0.6) {
+            self.signInButton.isHidden = false
+            self.spinner.stopAnimating()
+            self.errorLabel.isHidden = false
+            self.errorLabel.text = reason
+            self.containerView.isHidden = false
+        }
     }
     
     private func renderLoading() {
-        signInButton.isHidden = true
-        spinner.startAnimating()
-        errorLabel.isHidden = true
+        UIView.animate(withDuration: 0.6) {
+            self.signInButton.isHidden = true
+            self.spinner.startAnimating()
+            self.errorLabel.isHidden = true
+            self.containerView.isHidden = true
+        }
     }
     
     // MARK: - UI Setup

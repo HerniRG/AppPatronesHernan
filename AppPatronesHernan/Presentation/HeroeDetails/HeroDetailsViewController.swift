@@ -27,9 +27,8 @@ class HeroDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = viewModel.heroModel.name
-        heroDescription.text = viewModel.heroModel.description
-        heroImage.setImage(viewModel.heroModel.photo)
+        configureNavigationBar(title: viewModel.heroModel.name, backgroundColor: .systemIndigo)
+        configureHeroDetails()
         viewModel.loadTransformation()
         bind()
     }
@@ -52,6 +51,13 @@ class HeroDetailsViewController: UIViewController {
                 self?.renderNoButton()
             }
         }
+    }
+    
+    private func configureHeroDetails() {
+        heroDescription.text = viewModel.heroModel.description
+        heroImage.setImage(viewModel.heroModel.photo)
+        heroImage.layer.borderWidth = 0.5
+        heroImage.layer.cornerRadius = 10
     }
     
     // MARK: - State rendering functions

@@ -32,6 +32,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         
         tableView.register(HeroTableViewCell.nib, forCellReuseIdentifier: HeroTableViewCell.reuseIdentifier)
         
+        configureNavigationBar(title: "Heroes", backgroundColor: .systemIndigo)
         bind()
         viewModel.load()
     }

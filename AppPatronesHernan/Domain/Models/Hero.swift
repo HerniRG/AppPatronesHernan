@@ -5,7 +5,7 @@
 //  Created by Hernán Rodríguez on 1/10/24.
 //
 
-struct Hero: Equatable, Decodable {
+struct Hero: Equatable, Codable {
     let identifier: String
     let name: String
     let description: String

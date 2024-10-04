@@ -58,6 +58,11 @@
 			path = AppPatronesHernanUITests;
 			sourceTree = "<group>";
 		};
+		66588FA32CAF27A100BEAE50 /* Extensions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +93,7 @@
 		662FEB6B2CAC271900B09255 = {
 			isa = PBXGroup;
 			children = (
+				66588FA32CAF27A100BEAE50 /* Extensions */,
 				662FEB762CAC271900B09255 /* AppPatronesHernan */,
 				662FEB8D2CAC271A00B09255 /* AppPatronesHernanTests */,
 				662FEB972CAC271A00B09255 /* AppPatronesHernanUITests */,
@@ -122,6 +128,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				662FEB762CAC271900B09255 /* AppPatronesHernan */,
+				66588FA32CAF27A100BEAE50 /* Extensions */,
 			);
 			name = AppPatronesHernan;
 			packageProductDependencies = (

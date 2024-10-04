@@ -8,7 +8,7 @@
 @testable import AppPatronesHernan
 import XCTest
 
-final class APISessionMock: APISessionContract {
+final class APISessionLoginMock: APISessionContract {
     let mockResponse: ((any APIRequest) -> Result<Data, any Error>)
     
     init(mockResponse: @escaping (any APIRequest) -> Result<Data, any Error>) {
@@ -40,7 +40,7 @@ final class LoginUseCaseTests: XCTestCase {
         let expectation = self.expectation(description: "TestSuccess")
         let data = Data("hello-world".utf8)
         
-        APISession.shared = APISessionMock { _ in .success(data) }
+        APISession.shared = APISessionLoginMock { _ in .success(data) }
         sut.execute(credentials: Credentials(username: "a@b.es", password: "122345")) { result in
             guard case .success = result else {
                 return
@@ -58,7 +58,7 @@ final class LoginUseCaseTests: XCTestCase {
         
         let expectation = self.expectation(description: "TestFailure")
         
-        APISession.shared = APISessionMock { _ in .failure(APIErrorResponse.network("login-fail")) }
+        APISession.shared = APISessionLoginMock { _ in .failure(APIErrorResponse.network("login-fail")) }
         
         sut.execute(credentials: Credentials(username: "a@b.es", password: "123456")) { result in
             guard case .failure = result else {
