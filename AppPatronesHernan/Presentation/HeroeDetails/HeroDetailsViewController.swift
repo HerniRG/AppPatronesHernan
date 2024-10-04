@@ -13,6 +13,7 @@ class HeroDetailsViewController: UIViewController {
     @IBOutlet weak var heroImage: AsyncImageView!
     @IBOutlet weak var heroDescription: UILabel!
     @IBOutlet weak var transformationsButton: UIButton!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     private let viewModel: HeroDetailsViewModel
     
@@ -42,44 +43,61 @@ class HeroDetailsViewController: UIViewController {
     }
     
     private func bind() {
-            viewModel.onStateChanged.bind { [weak self] state in
-                switch state {
-                case .success:
-                    print("Success state: showing button.")
-                    self?.renderSuccess()
-                case .noButton:
-                    print("No button state: hiding button.")
-                    self?.renderNoButton()
-                case .loading:
-                    print("Loading hero details...")
-                case .error:
-                    print("Error loading hero details.")
-                }
+        viewModel.onStateChanged.bind { [weak self] state in
+            switch state {
+            case .success:
+                self?.renderSuccess()
+            case .noButton:
+                self?.renderNoButton()
+            case .loading:
+                self?.showLoadingState()
+            case .error:
+                print("Error loading hero details.")
             }
         }
+    }
     
     private func configureHeroDetails() {
-            heroDescription.text = "Loading description..."
-            heroImage.image = UIImage(named: "placeholder")
-            transformationsButton.isHidden = true
-        }
+        heroDescription.isHidden = true
+        heroImage.isHidden = true
+        transformationsButton.isHidden = true
         
-        private func updateHeroDetails() {
-            guard let hero = viewModel.hero else { return }
-            configureNavigationBar(title: hero.name, backgroundColor: .systemIndigo)
-            heroDescription.text = hero.description
-            heroImage.setImage(hero.photo)
-        }
+        spinner.startAnimating()
         
-        // MARK: - State rendering functions
-        private func renderSuccess() {
-            updateHeroDetails()  // Una vez que tenemos el héroe, actualizamos los detalles
-            transformationsButton.isHidden = false
-        }
-        
-        private func renderNoButton() {
-            updateHeroDetails()  // También actualizamos los detalles en este estado
-            transformationsButton.isHidden = true
-        }
+        heroImage.layer.cornerRadius = 10
+        heroImage.layer.masksToBounds = true
+        heroImage.layer.borderWidth = 1.0
+        heroImage.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    private func updateHeroDetails() {
+        guard let hero = viewModel.hero else { return }
+        configureNavigationBar(title: hero.name, backgroundColor: .systemIndigo)
+        heroDescription.text = hero.description
+        heroImage.setImage(hero.photo)
+    }
+    
+    private func renderSuccess() {
+        spinner.stopAnimating()
+        updateHeroDetails()
+        heroDescription.isHidden = false
+        heroImage.isHidden = false
+        transformationsButton.isHidden = false
+    }
+    
+    private func renderNoButton() {
+        spinner.stopAnimating()
+        updateHeroDetails()
+        transformationsButton.isHidden = true
+        heroDescription.isHidden = false
+        heroImage.isHidden = false
+    }
+    
+    private func showLoadingState() {
+        heroDescription.isHidden = true
+        heroImage.isHidden = true
+        transformationsButton.isHidden = true
+        spinner.startAnimating()
+    }
     
 }

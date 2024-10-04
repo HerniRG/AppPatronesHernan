@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +12,7 @@
             <connections>
                 <outlet property="heroDescription" destination="uHH-9r-KrD" id="unu-vt-o2s"/>
                 <outlet property="heroImage" destination="LuC-yv-G4D" id="6Rv-kS-ap6"/>
+                <outlet property="spinner" destination="Jde-TQ-fGf" id="1Tf-o0-mct"/>
                 <outlet property="transformationsButton" destination="K2I-Qt-UV1" id="kHB-49-oHN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,33 +22,43 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
-                    <rect key="frame" x="16" y="75" width="361" height="727"/>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Jde-TQ-fGf">
+                    <rect key="frame" x="178" y="407.66666666666669" width="37" height="37"/>
+                </activityIndicatorView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bxb-Az-lP2">
+                    <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-yv-G4D" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="361" height="250"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="250" id="x81-mX-F8E"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
-                            <rect key="frame" x="0.0" y="250" width="361" height="477"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
+                            <rect key="frame" x="16" y="16" width="361" height="286.33333333333331"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-yv-G4D" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="250"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="250" id="x81-mX-F8E"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
+                                    <rect key="frame" x="160" y="266" width="41.333333333333343" height="20.333333333333314"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="uHH-9r-KrD" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="JDB-HW-6hW"/>
-                        <constraint firstItem="uHH-9r-KrD" firstAttribute="top" secondItem="LuC-yv-G4D" secondAttribute="bottom" id="buO-qA-lRt"/>
-                        <constraint firstItem="LuC-yv-G4D" firstAttribute="leading" secondItem="4F8-bH-U6Y" secondAttribute="leading" id="c7h-MS-it9"/>
-                        <constraint firstItem="LuC-yv-G4D" firstAttribute="top" secondItem="4F8-bH-U6Y" secondAttribute="top" id="f79-Df-O40"/>
-                        <constraint firstAttribute="trailing" secondItem="uHH-9r-KrD" secondAttribute="trailing" id="jPA-Bv-quR"/>
-                        <constraint firstAttribute="trailing" secondItem="LuC-yv-G4D" secondAttribute="trailing" id="zML-9N-PG7"/>
+                        <constraint firstItem="4F8-bH-U6Y" firstAttribute="top" secondItem="bxb-Az-lP2" secondAttribute="top" constant="16" id="E0L-8m-0HS"/>
+                        <constraint firstAttribute="bottom" secondItem="4F8-bH-U6Y" secondAttribute="bottom" constant="20" symbolic="YES" id="GgT-SM-GMs"/>
+                        <constraint firstItem="4F8-bH-U6Y" firstAttribute="leading" secondItem="bxb-Az-lP2" secondAttribute="leading" constant="16" id="Tu8-nC-5Xs"/>
+                        <constraint firstAttribute="trailing" secondItem="4F8-bH-U6Y" secondAttribute="trailing" constant="16" id="gg0-nq-1A0"/>
+                        <constraint firstItem="4F8-bH-U6Y" firstAttribute="width" secondItem="bxb-Az-lP2" secondAttribute="width" multiplier="0.918575" id="iTG-C9-nd8"/>
                     </constraints>
-                </stackView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
+                    <viewLayoutGuide key="contentLayoutGuide" id="ZIH-q7-M4Q"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="tXh-6f-8xQ"/>
+                </scrollView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
                     <rect key="frame" x="122.66666666666667" y="783.66666666666663" width="147.66666666666663" height="34.333333333333371"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="filled" title="Transformations">
                         <color key="baseForegroundColor" name="DynamicButtonColor"/>
@@ -62,14 +72,14 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="K2I-Qt-UV1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6Tl-ba-RNZ"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="K2I-Qt-UV1" secondAttribute="bottom" id="K16-rw-z9I"/>
-                <constraint firstItem="4F8-bH-U6Y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="OiS-zZ-KVD"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4F8-bH-U6Y" secondAttribute="trailing" constant="16" id="PVG-fq-pEi"/>
-                <constraint firstItem="4F8-bH-U6Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="S9N-60-qW5"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4F8-bH-U6Y" secondAttribute="bottom" constant="16" id="ZZx-th-F3c"/>
+                <constraint firstItem="Jde-TQ-fGf" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Iyf-d4-aJW"/>
+                <constraint firstItem="bxb-Az-lP2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="NeW-3X-SkR"/>
+                <constraint firstItem="Jde-TQ-fGf" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Rrb-QC-94q"/>
+                <constraint firstItem="bxb-Az-lP2" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="34" id="ZjF-Kq-qb4"/>
+                <constraint firstItem="bxb-Az-lP2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="a1D-OB-wx2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bxb-Az-lP2" secondAttribute="trailing" id="azp-XO-dcb"/>
             </constraints>
-            <point key="canvasLocation" x="-91" y="-11"/>
+            <point key="canvasLocation" x="-92.36641221374046" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>

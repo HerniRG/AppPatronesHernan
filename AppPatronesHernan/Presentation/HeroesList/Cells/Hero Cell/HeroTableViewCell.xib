@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -33,6 +34,7 @@
                         </subviews>
                     </stackView>
                 </subviews>
+                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                 <constraints>
                     <constraint firstItem="uRW-l8-8mC" firstAttribute="leading" secondItem="so7-ey-1eg" secondAttribute="leading" constant="16" id="Bc5-FD-fPc"/>
                     <constraint firstItem="uRW-l8-8mC" firstAttribute="top" secondItem="so7-ey-1eg" secondAttribute="top" constant="12" id="DNg-eG-I9l"/>
@@ -40,6 +42,7 @@
                     <constraint firstAttribute="trailing" secondItem="uRW-l8-8mC" secondAttribute="trailing" constant="16" id="kyN-ZA-4oT"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" systemColor="systemOrangeColor"/>
             <connections>
                 <outlet property="avatar" destination="ojq-gJ-Uj2" id="PzZ-5E-Q9W"/>
                 <outlet property="heroName" destination="JKI-YF-PZb" id="pro-20-sYs"/>
@@ -47,4 +50,9 @@
             <point key="canvasLocation" x="-551.14503816793888" y="-81.690140845070431"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
