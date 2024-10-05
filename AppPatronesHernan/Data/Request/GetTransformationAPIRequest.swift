@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Get Transformations API Request
 struct GetTransformationsAPIRequest: APIRequest {
     typealias Response = [Transformation]
     
@@ -14,11 +15,13 @@ struct GetTransformationsAPIRequest: APIRequest {
     let method: HTTPMethod = .POST
     let body: (any Encodable)?
     
+    // Inicializa el request con el ID del héroe
     init(heroId: String) {
         body = RequestEntity(id: heroId)
     }
 }
 
+// MARK: - Request Entity (Encodable)
 private extension GetTransformationsAPIRequest {
     struct RequestEntity: Encodable {
         let id: String

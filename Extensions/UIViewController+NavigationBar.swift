@@ -7,9 +7,10 @@
 
 import UIKit
 
+// MARK: - Navigation Bar Configuration
 extension UIViewController {
-
-// MARK: - NavigationBar Configuration Extension
+    
+    /// Configura la barra de navegación con un título y color de fondo.
     func configureNavigationBar(title: String?, backgroundColor: UIColor) {
         self.title = title
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -19,6 +20,7 @@ extension UIViewController {
         appearance.backgroundColor = backgroundColor
         appearance.shadowColor = UIColor.black
         
+        // Configura la apariencia para diferentes estados de la barra de navegación
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.compactAppearance = appearance

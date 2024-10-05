@@ -8,6 +8,7 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - Mocks for GetSingleHeroUseCase
 private final class SuccessGetHeroUseCaseMock: GetSingleHeroUseCaseContract {
     func execute(heroId: String, completion: @escaping (Result<Hero, Error>) -> Void) {
         let hero = Hero(identifier: "1", name: "Goku", description: "Saiyan warrior", photo: "goku.jpg", favorite: false)
@@ -21,6 +22,7 @@ private final class FailedGetHeroUseCaseMock: GetSingleHeroUseCaseContract {
     }
 }
 
+// MARK: - Mocks for GetTransformationUseCase
 private final class SuccessGetTransformationUseCaseMock: GetTransformationUseCaseContract {
     var returnEmptyTransformations = false
     func execute(heroId: String, completion: @escaping (Result<[Transformation], Error>) -> Void) {
@@ -39,8 +41,10 @@ private final class FailedGetTransformationUseCaseMock: GetTransformationUseCase
     }
 }
 
+// MARK: - HeroDetailsViewModel Tests
 final class HeroDetailsViewModelTests: XCTestCase {
-
+    
+    // Test para verificar que los detalles del héroe y las transformaciones se cargan correctamente en caso de éxito
     func testSuccessScenario() {
         let expectation = self.expectation(description: "Success")
         let sut = HeroDetailsViewModel(id: "1", getHeroUseCase: SuccessGetHeroUseCaseMock(), getTransformationUseCase: SuccessGetTransformationUseCaseMock())
@@ -57,6 +61,7 @@ final class HeroDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.hero?.name, "Goku")
     }
     
+    // Test para verificar que el botón no se muestra cuando no hay transformaciones
     func testNoTransformationsScenario() {
         let expectation = self.expectation(description: "NoButton")
         let transformationMock = SuccessGetTransformationUseCaseMock()
@@ -74,6 +79,7 @@ final class HeroDetailsViewModelTests: XCTestCase {
         XCTAssertEqual(sut.transformations.count, 0)
     }
     
+    // Test para verificar que se maneja correctamente un error en la carga de detalles del héroe
     func testFailureScenario() {
         let expectation = self.expectation(description: "Error")
         let sut = HeroDetailsViewModel(id: "1", getHeroUseCase: FailedGetHeroUseCaseMock(), getTransformationUseCase: FailedGetTransformationUseCaseMock())

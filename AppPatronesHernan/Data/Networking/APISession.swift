@@ -7,26 +7,32 @@
 
 import Foundation
 
+// MARK: - APISession Contract
 protocol APISessionContract {
     func request<Request: APIRequest>(apiRequest: Request, completion: @escaping (Result<Data, Error>) -> Void)
 }
 
+// MARK: - APISession Implementation
 struct APISession: APISessionContract {
     static var shared: APISessionContract = APISession()
     
     private let session = URLSession(configuration: .default)
     private let requestInterceptors: [APIRequestInterceptor]
     
+    // Inicializa la sesión con interceptores (por defecto incluye autenticación)
     init(requestInterceptors: [APIRequestInterceptor] = [AuthenticationRequestInterceptor()]) {
         self.requestInterceptors = requestInterceptors
     }
     
-    func request<Request: APIRequest >(apiRequest: Request, completion: @escaping (Result<Data, Error>) -> Void) {
+    // Realiza la solicitud a través del protocolo APIRequest
+    func request<Request: APIRequest>(apiRequest: Request, completion: @escaping (Result<Data, Error>) -> Void) {
         do {
             var request = try apiRequest.getRequest()
             
+            // Aplica los interceptores al request
             requestInterceptors.forEach { $0.intercept(request: &request) }
             
+            // Ejecuta la solicitud HTTP
             session.dataTask(with: request) { data, response, error in
                 if let error {
                     return completion(.failure(error))

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Get Heroes API Request
 struct GetHeroesAPIRequest: APIRequest {
     typealias Response = [Hero]
     
@@ -14,11 +15,13 @@ struct GetHeroesAPIRequest: APIRequest {
     let method: HTTPMethod = .POST
     let body: (any Encodable)?
     
+    // Inicializa el request con un nombre opcional
     init(name: String?) {
         body = RequestEntity(name: name ?? "")
     }
 }
 
+// MARK: - Request Entity (Encodable)
 private extension GetHeroesAPIRequest {
     struct RequestEntity: Encodable {
         let name: String

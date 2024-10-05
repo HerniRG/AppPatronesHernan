@@ -7,10 +7,12 @@
 
 import Foundation
 
+// MARK: - HTTP Methods
 enum HTTPMethod: String {
     case GET, POST, PUT, UPDATE, HEAD, PATCH, DELETE, OPTIONS
 }
 
+// MARK: - API Request Protocol
 protocol APIRequest {
     var host: String { get }
     var method: HTTPMethod { get }
@@ -24,12 +26,14 @@ protocol APIRequest {
     typealias APIRequestCompletion = (APIRequestResponse) -> Void
 }
 
+// MARK: - Default Implementations
 extension APIRequest {
     var host: String { "dragonball.keepcoding.education" }
     var queryParameters: [String: String] { [:] }
     var headers: [String: String] { [:] }
     var body: Encodable? { nil }
     
+    // Construcción de la URLRequest con base en los parámetros del APIRequest
     func getRequest() throws -> URLRequest {
         var components = URLComponents()
         components.scheme = "https"
@@ -59,12 +63,14 @@ extension APIRequest {
             do {
                 let data = try result.get()
                 
+                // Manejo de respuestas que pueden ser Void o Data
                 if Response.self == Void.self {
                     return completion(.success(() as! Response))
                 } else if Response.self == Data.self {
                     return completion(.success(data as! Response))
                 }
                 
+                // Decodificación de la respuesta en el tipo esperado
                 return try completion(.success(JSONDecoder().decode(Response.self, from: data)))
             } catch let error as APIErrorResponse {
                 completion(.failure(error))

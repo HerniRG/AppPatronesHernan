@@ -8,20 +8,25 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - API Session Mock for GetTransformations
 final class APISessionGetTransformationsMock: APISessionContract {
     let mockResponse: ((any APIRequest) -> Result<Data, any Error>)
     
+    // Inicializa el mock con una respuesta simulada
     init(mockResponse: @escaping (any APIRequest) -> Result<Data, any Error>) {
         self.mockResponse = mockResponse
     }
     
+    // Simula la petición del API, devolviendo la respuesta simulada
     func request<Request: APIRequest>(apiRequest: Request, completion: @escaping (Result<Data, any Error>) -> Void) {
         completion(mockResponse(apiRequest))
     }
 }
 
+// MARK: - GetTransformationUseCase Tests
 final class GetTransformationUseCaseTests: XCTestCase {
     
+    // Test para verificar que las transformaciones se devuelven correctamente
     func testSuccessReturnsTransformations() {
         let sut = GetTransformationUseCase()
         
@@ -51,6 +56,7 @@ final class GetTransformationUseCaseTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    // Test para verificar que un fallo en la petición devuelve un error
     func testFailureReturnsError() {
         let sut = GetTransformationUseCase()
         

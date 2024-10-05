@@ -7,8 +7,9 @@
 
 import UIKit
 
+// MARK: - Heroes List View Controller
 final class HeroesListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+    
     @IBOutlet private weak var tableView: UITableView!
     @IBOutlet private weak var errorContainer: UIStackView!
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
@@ -16,6 +17,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
     
     private let viewModel: HeroesListViewModel
     
+    // MARK: - Initialization
     init(viewModel: HeroesListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "HeroesListView", bundle: Bundle(for: type(of: self)))
@@ -25,6 +27,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -37,13 +40,13 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         viewModel.load()
     }
     
+    // MARK: - Retry Action
     @IBAction func onRetryTapped(_ sender: Any) {
         renderLoading()
         viewModel.load()
     }
     
-    
-    // MARK: - States
+    // MARK: - Bind ViewModel to UI
     private func bind() {
         viewModel.onStateChanged.bind { [weak self] state in
             switch state {
@@ -57,6 +60,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
+    // MARK: - UI State Rendering
     private func renderError(_ reason: String) {
         spinner.stopAnimating()
         errorContainer.isHidden = false
@@ -77,6 +81,7 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         tableView.reloadData()
     }
     
+    // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         viewModel.heroes.count
     }
@@ -95,12 +100,9 @@ final class HeroesListViewController: UIViewController, UITableViewDataSource, U
         return cell
     }
     
+    // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let heroDetailsViewController = HeroeDetailsBuilder(id: viewModel.heroes[indexPath.row].identifier).build()
         self.navigationController?.pushViewController(heroDetailsViewController, animated: true)
     }
-
-
-
-
 }

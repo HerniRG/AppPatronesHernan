@@ -7,6 +7,7 @@
 
 import UIKit
 
+// MARK: - Login View Controller
 final class LoginViewController: UIViewController {
     
     @IBOutlet weak var userNameField: UITextField!
@@ -15,9 +16,11 @@ final class LoginViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var signInButton: UIButton!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var viewCenterYConstraint: NSLayoutConstraint!
     
     private let viewModel: LoginViewModel
     
+    // MARK: - Initialization
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "LoginView", bundle: Bundle(for: type(of: self)))
@@ -27,16 +30,20 @@ final class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
         bind()
+        setupKeyboardNotifications()  // Para manejar el teclado
     }
     
+    // MARK: - Login Action
     @IBAction func onLoginButtonTapped(_ sender: Any) {
         viewModel.signIn(userNameField.text, passwordField.text)
     }
     
+    // MARK: - Bind ViewModel to UI
     private func bind() {
         viewModel.onStateChanged.bind { [weak self] state in
             switch state {
@@ -51,7 +58,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    // MARK: - State rendering functions
+    // MARK: - State Rendering
     private func renderSuccess() {
         UIView.animate(withDuration: 0.6) {
             self.signInButton.isHidden = true
@@ -82,13 +89,40 @@ final class LoginViewController: UIViewController {
     
     // MARK: - UI Setup
     private func setupUI() {
-        // Redondear esquinas del containerView
+        // Configuración de la vista contenedora
         containerView.layer.cornerRadius = 10
         containerView.layer.masksToBounds = true
-        
-        // Opcional: Si quieres agregar un borde al containerView
         containerView.layer.borderWidth = 1
         containerView.layer.borderColor = UIColor.lightGray.cgColor
+    }
+    
+    // MARK: - Keyboard Handling
+    private func setupKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardWillShow(_ notification: Notification) {
+        adjustViewForKeyboard(notification, isShowing: true)
+    }
+    
+    @objc private func keyboardWillHide(_ notification: Notification) {
+        adjustViewForKeyboard(notification, isShowing: false)
+    }
+    
+    private func adjustViewForKeyboard(_ notification: Notification, isShowing: Bool) {
+        guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
+        let keyboardHeight = isShowing ? keyboardFrame.height : 0
+        viewCenterYConstraint.constant = isShowing ? -keyboardHeight / 2 : 0
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    // Elimina los observadores del teclado
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 

@@ -8,31 +8,38 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - API Session Mock for Login
 final class APISessionLoginMock: APISessionContract {
     let mockResponse: ((any APIRequest) -> Result<Data, any Error>)
     
+    // Inicializa el mock con una respuesta simulada
     init(mockResponse: @escaping (any APIRequest) -> Result<Data, any Error>) {
         self.mockResponse = mockResponse
     }
     
+    // Simula la petición del API, devolviendo la respuesta simulada
     func request<Request: APIRequest>(apiRequest: Request, completion: @escaping (Result<Data, any Error>) -> Void) {
         completion(mockResponse(apiRequest))
     }
 }
 
+// MARK: - Dummy Session Data Source
 final class DummySessionDataSource: SessionDataSourceContract {
     private(set) var session: Data?
-        
+    
+    // Almacena la sesión simulada
     func storeSession(_ session: Data) {
         self.session = session
     }
     
+    // No retorna ninguna sesión almacenada
     func getSession() -> Data? { nil }
-
 }
 
+// MARK: - Login Use Case Tests
 final class LoginUseCaseTests: XCTestCase {
     
+    // Test para verificar que el token se almacena correctamente en caso de éxito
     func testSuccessStoresToken() {
         let dataSource = DummySessionDataSource()
         let sut = LoginUseCase(dataSource: dataSource)
@@ -52,6 +59,7 @@ final class LoginUseCaseTests: XCTestCase {
         XCTAssertEqual(dataSource.session, data)
     }
     
+    // Test para verificar que el token no se almacena en caso de fallo
     func testFailureDoesNotStoreToken() {
         let dataSource = DummySessionDataSource()
         let sut = LoginUseCase(dataSource: dataSource)

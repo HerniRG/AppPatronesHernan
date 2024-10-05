@@ -7,8 +7,8 @@
 
 import UIKit
 
+// MARK: - Hero Details View Controller
 class HeroDetailsViewController: UIViewController {
-    
     
     @IBOutlet weak var heroImage: AsyncImageView!
     @IBOutlet weak var heroDescription: UILabel!
@@ -17,6 +17,7 @@ class HeroDetailsViewController: UIViewController {
     
     private let viewModel: HeroDetailsViewModel
     
+    // Inicialización con ViewModel
     init(viewModel: HeroDetailsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "HeroDetailsViewController", bundle: Bundle(for: type(of: self)))
@@ -26,6 +27,7 @@ class HeroDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigationBar(title: nil, backgroundColor: .systemIndigo)
@@ -34,6 +36,7 @@ class HeroDetailsViewController: UIViewController {
         bind()
     }
     
+    // MARK: - Transformation Button Action
     @IBAction func onTransformationButtonTapped(_ sender: Any) {
         guard let hero = viewModel.hero else { return }
         print("Transformations for hero \(hero.name):")
@@ -42,6 +45,7 @@ class HeroDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Binding ViewModel
     private func bind() {
         viewModel.onStateChanged.bind { [weak self] state in
             switch state {
@@ -57,11 +61,11 @@ class HeroDetailsViewController: UIViewController {
         }
     }
     
+    // MARK: - Configure Hero Details View
     private func configureHeroDetails() {
         heroDescription.isHidden = true
         heroImage.isHidden = true
         transformationsButton.isHidden = true
-        
         spinner.startAnimating()
         
         heroImage.layer.cornerRadius = 10
@@ -70,6 +74,7 @@ class HeroDetailsViewController: UIViewController {
         heroImage.layer.borderColor = UIColor.gray.cgColor
     }
     
+    // MARK: - Update Hero Details
     private func updateHeroDetails() {
         guard let hero = viewModel.hero else { return }
         configureNavigationBar(title: hero.name, backgroundColor: .systemIndigo)
@@ -77,6 +82,7 @@ class HeroDetailsViewController: UIViewController {
         heroImage.setImage(hero.photo)
     }
     
+    // MARK: - Render States
     private func renderSuccess() {
         spinner.stopAnimating()
         
@@ -113,9 +119,6 @@ class HeroDetailsViewController: UIViewController {
             self.heroImage.isHidden = true
             self.transformationsButton.isHidden = true
         }
-        
         spinner.startAnimating()
     }
-    
-    
 }

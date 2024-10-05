@@ -7,12 +7,13 @@
 
 import UIKit
 
+// MARK: - Splash View Controller
 final class SplashViewController: UIViewController {
     
     private let viewModel: SplashViewModel
-    
     @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
+    // MARK: - Initialization
     init(viewModel: SplashViewModel) {
         self.viewModel = viewModel
         super.init(nibName: "SplashView", bundle: Bundle(for: type(of: self)))
@@ -22,12 +23,14 @@ final class SplashViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind()
-        viewModel.load()
+        bind()  // Vincula el estado del ViewModel con la UI
+        viewModel.load()  // Carga los datos iniciales
     }
     
+    // MARK: - Bind ViewModel to UI
     private func bind() {
         viewModel.onStateChanged.bind { [weak self] state in
             switch state {
@@ -37,11 +40,12 @@ final class SplashViewController: UIViewController {
                 self?.setAnimation(false)
                 self?.present(LoginBuilder().build(), animated: true)
             case .error:
-                break
+                break  // Manejo de error si es necesario
             }
         }
     }
     
+    // MARK: - Control Spinner Animation
     private func setAnimation(_ animating: Bool) {
         switch spinner.isAnimating {
         case true where !animating:

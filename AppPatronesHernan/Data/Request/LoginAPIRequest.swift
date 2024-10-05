@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Login API Request
 struct LoginAPIRequest: APIRequest {
     typealias Response = Data
     
@@ -14,6 +15,7 @@ struct LoginAPIRequest: APIRequest {
     let method: HTTPMethod = .POST
     let path: String = "/api/auth/login"
     
+    // Inicializa la solicitud de login con las credenciales del usuario
     init(credentials: Credentials) {
         let loginData = Data(String(format: "%@:%@", credentials.username, credentials.password).utf8)
         let base64String = loginData.base64EncodedString()

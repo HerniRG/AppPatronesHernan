@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - Hero Details View State
 enum HeroDetailsState {
     case success
     case noButton
@@ -14,6 +15,7 @@ enum HeroDetailsState {
     case error
 }
 
+// MARK: - Hero Details ViewModel
 final class HeroDetailsViewModel {
     let onStateChanged = Binding<HeroDetailsState>()
     private let id: String
@@ -22,16 +24,18 @@ final class HeroDetailsViewModel {
     private(set) var hero: Hero?
     private(set) var transformations: [Transformation] = []
     
+    // Inicializa el ViewModel con los casos de uso necesarios
     init(id: String, getHeroUseCase: GetSingleHeroUseCaseContract, getTransformationUseCase: GetTransformationUseCaseContract) {
         self.id = id
         self.getHeroUseCase = getHeroUseCase
         self.getTransformationUseCase = getTransformationUseCase
     }
     
+    // Carga los detalles del héroe
     func loadHeroDetails() {
         onStateChanged.update(newValue: .loading)
         
-        // Obtenemos el héroe por id
+        // Obtenemos el héroe por su id
         getHeroUseCase.execute(heroId: id) { [weak self] result in
             switch result {
             case .success(let hero):
@@ -43,6 +47,7 @@ final class HeroDetailsViewModel {
         }
     }
     
+    // Carga las transformaciones del héroe
     private func loadTransformations() {
         guard let hero = hero else { return }
         

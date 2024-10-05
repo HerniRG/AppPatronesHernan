@@ -7,19 +7,22 @@
 
 import UIKit
 
+// MARK: - AsyncImageView: UIImageView for asynchronous image loading
 final class AsyncImageView: UIImageView {
     private var workItem: DispatchWorkItem?
-
+    
+    // MARK: - Set Image by URL String
     func setImage(_ string: String) {
         if let url = URL(string: string) {
             setImage(url)
         }
     }
-
+    
+    // MARK: - Set Image by URL
     func setImage(_ url: URL) {
-        // Utiliza una imagen desenfocada como placeholder
+        // Asigna una imagen desenfocada como placeholder mientras se carga la imagen
         self.image = getBlurredPlaceholderImage() ?? UIImage(named: "defaultPlaceholder")
-
+        
         let workItem = DispatchWorkItem {
             let image = (try? Data(contentsOf: url)).flatMap { UIImage(data: $0) }
             DispatchQueue.main.async { [weak self] in
@@ -30,13 +33,14 @@ final class AsyncImageView: UIImageView {
         DispatchQueue.global().async(execute: workItem)
         self.workItem = workItem
     }
-
+    
+    // MARK: - Cancel the image loading task
     func cancel() {
         workItem?.cancel()
         workItem = nil
     }
-
-    // Placeholder desenfocada
+    
+    // MARK: - Create blurred placeholder image
     private func getBlurredPlaceholderImage() -> UIImage? {
         guard let placeholder = UIImage(named: "placeholder") else {
             print("Error: La imagen de placeholder no existe.")

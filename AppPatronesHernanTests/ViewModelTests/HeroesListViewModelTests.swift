@@ -8,6 +8,7 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - Success Mock for GetAllHeroesUseCase
 private final class SuccessGetHeroesUseCaseMock: GetAllHeroesUseCaseContract {
     func execute(completion: @escaping (Result<[AppPatronesHernan.Hero], any Error>) -> Void) {
         completion(.success([Hero(identifier: "1234",
@@ -18,15 +19,17 @@ private final class SuccessGetHeroesUseCaseMock: GetAllHeroesUseCaseContract {
     }
 }
 
+// MARK: - Failure Mock for GetAllHeroesUseCase
 private final class FailedGetHeroesUseCaseMock: GetAllHeroesUseCaseContract {
     func execute(completion: @escaping (Result<[AppPatronesHernan.Hero], any Error>) -> Void) {
         completion(.failure(APIErrorResponse.unknown("")))
     }
 }
 
-
+// MARK: - HeroesListViewModel Tests
 final class HeroesListViewModelTests: XCTestCase {
     
+    // Test para verificar que la lista de héroes se carga correctamente en caso de éxito
     func testSuccessScenario() {
         let successExpectation = expectation(description: "Success")
         let loadingExpectation = expectation(description: "Loading")
@@ -46,6 +49,7 @@ final class HeroesListViewModelTests: XCTestCase {
         XCTAssertEqual(sut.heroes.count, 1)
     }
     
+    // Test para verificar que se maneja correctamente el error en la carga de héroes
     func testFailScenario() {
         let errorExpectation = expectation(description: "Error")
         let loadingExpectation = expectation(description: "Loading")

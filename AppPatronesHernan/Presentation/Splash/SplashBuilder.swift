@@ -7,7 +7,10 @@
 
 import UIKit
 
+// MARK: - Splash Builder
 final class SplashBuilder {
+    
+    // Construye y retorna el controlador de la pantalla de splash
     func build() -> UIViewController {
         let viewModel = SplashViewModel()
         return SplashViewController(viewModel: viewModel)

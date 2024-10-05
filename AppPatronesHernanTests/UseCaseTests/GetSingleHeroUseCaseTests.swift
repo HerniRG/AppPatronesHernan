@@ -8,6 +8,7 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - Success Mock for GetAllHeroesUseCase
 private final class SuccessGetAllHeroesUseCaseMock: GetAllHeroesUseCaseContract {
     func execute(completion: @escaping (Result<[Hero], Error>) -> Void) {
         let heroes = [
@@ -18,14 +19,17 @@ private final class SuccessGetAllHeroesUseCaseMock: GetAllHeroesUseCaseContract 
     }
 }
 
+// MARK: - Failure Mock for GetAllHeroesUseCase
 private final class FailedGetAllHeroesUseCaseMock: GetAllHeroesUseCaseContract {
     func execute(completion: @escaping (Result<[Hero], Error>) -> Void) {
         completion(.failure(APIErrorResponse.network("heroes-fail")))
     }
 }
 
+// MARK: - GetSingleHeroUseCase Tests
 final class GetSingleHeroUseCaseTests: XCTestCase {
-
+    
+    // Test para verificar que se devuelve el héroe correcto en caso de éxito
     func testSuccessReturnsSingleHero() {
         let sut = GetSingleHeroUseCase(getAllHeroesUseCase: SuccessGetAllHeroesUseCaseMock())
         
@@ -45,6 +49,7 @@ final class GetSingleHeroUseCaseTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    // Test para verificar que se devuelve un error en caso de fallo
     func testFailureReturnsError() {
         let sut = GetSingleHeroUseCase(getAllHeroesUseCase: FailedGetAllHeroesUseCaseMock())
         
@@ -63,6 +68,7 @@ final class GetSingleHeroUseCaseTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    // Test para verificar que se devuelve un error cuando no se encuentra el héroe
     func testHeroNotFoundReturnsError() {
         let sut = GetSingleHeroUseCase(getAllHeroesUseCase: SuccessGetAllHeroesUseCaseMock())
         

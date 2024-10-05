@@ -7,12 +7,14 @@
 
 import Foundation
 
+// MARK: - API Error Response Model
 struct APIErrorResponse: Error, Equatable {
     let url: String
     let statusCode: Int
     let data: Data?
     let message: String
     
+    // Inicializador para los errores de API
     init(url: String, statusCode: Int, data: Data? = nil, message: String) {
         self.url = url
         self.statusCode = statusCode
@@ -21,7 +23,9 @@ struct APIErrorResponse: Error, Equatable {
     }
 }
 
+// MARK: - API Error Response Presets
 extension APIErrorResponse {
+    // Errores comunes predefinidos
     static func network(_ url: String) -> APIErrorResponse {
         APIErrorResponse(url: url, statusCode: -1, message: "Network connection error")
     }

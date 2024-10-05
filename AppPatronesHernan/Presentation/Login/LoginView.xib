@@ -17,6 +17,7 @@
                 <outlet property="spinner" destination="e0j-9b-am7" id="hQR-q8-cJb"/>
                 <outlet property="userNameField" destination="SH5-rH-bse" id="jxq-TO-6LB"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fW2-0L-e73"/>
+                <outlet property="viewCenterYConstraint" destination="yOa-Aw-D13" id="3nL-Vr-980"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

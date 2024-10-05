@@ -8,20 +8,24 @@
 @testable import AppPatronesHernan
 import XCTest
 
+// MARK: - Success Mock for LoginUseCase
 private final class SuccessLoginUseCaseMock: LoginUseCaseContract {
     func execute(credentials: Credentials, completion: @escaping (Result<Void, LoginUseCaseError>) -> Void) {
         completion(.success(()))  // Simula éxito en el login
     }
 }
 
+// MARK: - Failure Mock for LoginUseCase
 private final class FailedLoginUseCaseMock: LoginUseCaseContract {
     func execute(credentials: Credentials, completion: @escaping (Result<Void, LoginUseCaseError>) -> Void) {
         completion(.failure(LoginUseCaseError(reason: "Invalid credentials")))  // Simula fallo en el login
     }
 }
 
+// MARK: - LoginViewModel Tests
 final class LoginViewModelTests: XCTestCase {
     
+    // Test para verificar que el login se realiza correctamente en caso de éxito
     func testSuccessScenario() {
         let successExpectation = expectation(description: "Success")
         let loadingExpectation = expectation(description: "Loading")
@@ -42,6 +46,7 @@ final class LoginViewModelTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    // Test para verificar que el login falla con credenciales incorrectas
     func testFailureScenario() {
         let errorExpectation = expectation(description: "Error")
         let loadingExpectation = expectation(description: "Loading")
@@ -63,6 +68,7 @@ final class LoginViewModelTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    // Test para verificar que el login falla con credenciales vacías
     func testEmptyCredentialsScenario() {
         let errorExpectation = expectation(description: "Error")
         let loadingExpectation = expectation(description: "Loading")
