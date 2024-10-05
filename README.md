@@ -48,7 +48,7 @@ La aplicación sigue un patrón de diseño MVVM (Model-View-ViewModel) para aseg
 ## Instalación
 1. Clona el repositorio en tu máquina local.
    ```bash
-   git clone https://github.com/hernirg85/HeroesApp.git
+   git clone https://github.com/HerniRG/AppPatronesHernan.git
    ```
 2. Abre el archivo `.xcodeproj` en Xcode.
 3. Ejecuta la aplicación en un simulador o dispositivo físico.
