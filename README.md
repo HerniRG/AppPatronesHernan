@@ -1,6 +1,28 @@
 
 # Heroes App
 
+## Video Demo
+[![Video Demo](https://img.youtube.com/vi/68fkHUG-jVY/0.jpg)](https://youtu.be/68fkHUG-jVY)
+
+## Pantallazos
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <a href="https://live.staticflickr.com/65535/54044731669_2718bd0c7a_o.png" target="_blank">
+        <img src="https://live.staticflickr.com/65535/54044731669_2718bd0c7a_o.png" width="200px">
+    </a>
+    <a href="https://live.staticflickr.com/65535/54044858920_37b883f6a1_o.png" target="_blank">
+        <img src="https://live.staticflickr.com/65535/54044858920_37b883f6a1_o.png" width="200px">
+    </a>
+    <a href="https://live.staticflickr.com/65535/54044663983_e2a8b064c7_o.png" target="_blank">
+        <img src="https://live.staticflickr.com/65535/54044663983_e2a8b064c7_o.png" width="200px">
+    </a>
+    <a href="https://live.staticflickr.com/65535/54043546422_4e1f86a4fa_o.png" target="_blank">
+        <img src="https://live.staticflickr.com/65535/54043546422_4e1f86a4fa_o.png" width="200px">
+    </a>
+    <a href="https://live.staticflickr.com/65535/54044859660_17434930b8_o.png" target="_blank">
+        <img src="https://live.staticflickr.com/65535/54044859660_17434930b8_o.png" width="200px">
+    </a>
+</div>
+
 ## Descripción
 Heroes App es una aplicación móvil que muestra una lista de héroes del universo de Dragon Ball, permitiendo al usuario ver información detallada de cada héroe. La aplicación utiliza la API de Dragon Ball desarrollada por KeepCoding para obtener y mostrar los datos de los héroes.
 
