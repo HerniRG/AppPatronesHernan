@@ -29,17 +29,17 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="793"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="4F8-bH-U6Y">
-                            <rect key="frame" x="16" y="16" width="361" height="286.33333333333331"/>
+                            <rect key="frame" x="16" y="16.000000000000014" width="361" height="255.33333333333337"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-yv-G4D" customClass="AsyncImageView" customModule="AppPatronesHernan" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="361" height="250"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="361" height="220"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="250" id="x81-mX-F8E"/>
+                                        <constraint firstAttribute="height" constant="220" id="x81-mX-F8E"/>
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uHH-9r-KrD">
-                                    <rect key="frame" x="160" y="266" width="41.333333333333343" height="20.333333333333314"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="160.66666666666666" y="236" width="39.666666666666657" height="19.333333333333343"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -57,10 +57,10 @@
                     <viewLayoutGuide key="frameLayoutGuide" id="tXh-6f-8xQ"/>
                 </scrollView>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2I-Qt-UV1">
-                    <rect key="frame" x="122.66666666666667" y="783.66666666666663" width="147.66666666666663" height="34.333333333333371"/>
+                    <rect key="frame" x="116.66666666666667" y="783.66666666666663" width="161" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="filled" title="Transformations">
+                    <buttonConfiguration key="configuration" style="filled" title="Transformaciones">
                         <color key="baseForegroundColor" name="DynamicButtonColor"/>
                         <color key="baseBackgroundColor" systemColor="systemIndigoColor"/>
                     </buttonConfiguration>

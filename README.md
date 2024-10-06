@@ -31,6 +31,7 @@ Heroes App es una aplicación móvil que muestra una lista de héroes del univer
 - Visualización de una lista de héroes de Dragon Ball.
 - Posibilidad de seleccionar un héroe para ver sus detalles.
 - En la pantalla de detalles, se muestra un botón solo si el héroe tiene transformaciones disponibles.
+- Pantalla de transformaciones, donde se pueden ver las transformaciones del héroe seleccionado.
 
 ## Arquitectura
 La aplicación sigue un patrón de diseño MVVM (Model-View-ViewModel) para asegurar una separación clara de responsabilidades y facilitar el mantenimiento y la escalabilidad.
@@ -39,6 +40,7 @@ La aplicación sigue un patrón de diseño MVVM (Model-View-ViewModel) para aseg
 1. **Pantalla de Login**: Permite al usuario autenticarse en la aplicación mediante JWT.
 2. **Pantalla de Lista de Héroes**: Muestra una lista de héroes obtenida de la API.
 3. **Pantalla de Detalles del Héroe**: Muestra detalles específicos de cada héroe seleccionado, con un botón que aparece solo si el héroe tiene transformaciones disponibles.
+4. **Pantalla de Transformaciones**: Al pulsar el botón en la pantalla de detalles, se accede a una lista de las transformaciones del héroe.
 
 ## Requisitos del Proyecto
 - **Xcode**: 12.0 o superior.
@@ -57,7 +59,7 @@ La aplicación sigue un patrón de diseño MVVM (Model-View-ViewModel) para aseg
 1. Al abrir la aplicación, serás llevado a la pantalla de login.
 2. Inicia sesión utilizando las credenciales proporcionadas por la API de Dragon Ball.
 3. Después de iniciar sesión, verás una lista de héroes. Puedes hacer clic en cualquiera de ellos para ver sus detalles.
-4. Si el héroe tiene transformaciones, verás un botón adicional en la pantalla de detalles.
+4. Si el héroe tiene transformaciones, verás un botón adicional en la pantalla de detalles, el cual te llevará a una lista de las transformaciones del héroe.
 
 ## Contacto
 **Autor**: Hernán Rodríguez  

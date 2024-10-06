@@ -1,20 +1,20 @@
 //
-//  HeroTableViewCell.swift
+//  TransformationTableViewCell.swift
 //  AppPatronesHernan
 //
-//  Created by Hernán Rodríguez on 1/10/24.
+//  Created by Hernán Rodríguez on 6/10/24.
 //
 
 import UIKit
 
-// MARK: - Hero TableView Cell
-final class HeroTableViewCell: UITableViewCell {
-    static let reuseIdentifier = "HeroTableViewCell"
-    static var nib: UINib { UINib(nibName: "HeroTableViewCell", bundle: Bundle(for: HeroTableViewCell.self)) }
-    
+// MARK: - Transformation TableView Cell
+class TransformationTableViewCell: UITableViewCell {
+    static let reuseIdentifier = "TransformationTableViewCell"
+    static var nib: UINib { UINib(nibName: "TransformationTableViewCell", bundle: Bundle(for: TransformationTableViewCell.self)) }
+
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var avatar: AsyncImageView!
-    @IBOutlet private weak var heroName: UILabel!
+    @IBOutlet private weak var transformationName: UILabel!
     
     // MARK: - View Lifecycle
     override func awakeFromNib() {
@@ -35,7 +35,7 @@ final class HeroTableViewCell: UITableViewCell {
     }
     
     func setHeroName(_ heroName: String) {
-        self.heroName.text = heroName
+        self.transformationName.text = heroName
     }
     
     // MARK: - Setup Avatar

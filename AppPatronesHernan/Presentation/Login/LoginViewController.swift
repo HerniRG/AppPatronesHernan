@@ -10,13 +10,13 @@ import UIKit
 // MARK: - Login View Controller
 final class LoginViewController: UIViewController {
     
-    @IBOutlet weak var userNameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var viewCenterYConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var userNameField: UITextField!
+    @IBOutlet private weak var passwordField: UITextField!
+    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
+    @IBOutlet private weak var signInButton: UIButton!
+    @IBOutlet private weak var containerView: UIView!
+    @IBOutlet private weak var viewCenterYConstraint: NSLayoutConstraint!
     
     private let viewModel: LoginViewModel
     

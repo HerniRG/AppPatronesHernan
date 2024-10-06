@@ -10,10 +10,10 @@ import UIKit
 // MARK: - Hero Details View Controller
 class HeroDetailsViewController: UIViewController {
     
-    @IBOutlet weak var heroImage: AsyncImageView!
-    @IBOutlet weak var heroDescription: UILabel!
-    @IBOutlet weak var transformationsButton: UIButton!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet private weak var heroImage: AsyncImageView!
+    @IBOutlet private weak var heroDescription: UILabel!
+    @IBOutlet private weak var transformationsButton: UIButton!
+    @IBOutlet private weak var spinner: UIActivityIndicatorView!
     
     private let viewModel: HeroDetailsViewModel
     
@@ -39,10 +39,8 @@ class HeroDetailsViewController: UIViewController {
     // MARK: - Transformation Button Action
     @IBAction func onTransformationButtonTapped(_ sender: Any) {
         guard let hero = viewModel.hero else { return }
-        print("Transformations for hero \(hero.name):")
-        viewModel.transformations.forEach { transformation in
-            print("Transformation: \(transformation.name)")
-        }
+        let transformationViewController = TransformationListBuilder(id: hero.identifier).build()
+        self.navigationController?.pushViewController(transformationViewController, animated: true)
     }
     
     // MARK: - Binding ViewModel
