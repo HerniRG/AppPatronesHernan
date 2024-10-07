@@ -34,8 +34,29 @@ final class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        animateEntry() // Nueva animación de entrada
         bind()
-        setupKeyboardNotifications()  // Para manejar el teclado
+        setupKeyboardNotifications()
+    }
+    
+    // MARK: - Animación de entrada inicial
+    private func animateEntry() {
+        // Inicialmente oculta los elementos
+        userNameField.alpha = 0
+        passwordField.alpha = 0
+        signInButton.alpha = 0
+        signInButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        
+        // Animación de entrada
+        UIView.animate(withDuration: 0.4, delay: 0.1, options: .curveEaseOut, animations: {
+            self.userNameField.alpha = 1
+            self.passwordField.alpha = 1
+        })
+        
+        UIView.animate(withDuration: 0.6, delay: 0.2, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: .curveEaseOut, animations: {
+            self.signInButton.alpha = 1
+            self.signInButton.transform = .identity
+        })
     }
     
     // MARK: - Login Action
@@ -60,36 +81,38 @@ final class LoginViewController: UIViewController {
     
     // MARK: - State Rendering
     private func renderSuccess() {
-        UIView.animate(withDuration: 0.6) {
-            self.signInButton.isHidden = true
-            self.spinner.stopAnimating()
-            self.errorLabel.isHidden = true
-            self.containerView.isHidden = true
-        }
+        UIView.animate(withDuration: 0.6, animations: {
+            self.signInButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.spinner.alpha = 1.0
+            self.spinner.startAnimating()
+            self.errorLabel.alpha = 0
+            self.containerView.alpha = 0
+        })
     }
     
     private func renderError(_ reason: String) {
-        UIView.animate(withDuration: 0.6) {
-            self.signInButton.isHidden = false
+        UIView.animate(withDuration: 0.6, animations: {
+            self.signInButton.transform = .identity
+            self.spinner.alpha = 0
             self.spinner.stopAnimating()
-            self.errorLabel.isHidden = false
+            self.errorLabel.alpha = 1.0
             self.errorLabel.text = reason
-            self.containerView.isHidden = false
-        }
+            self.containerView.alpha = 1.0
+        })
     }
     
     private func renderLoading() {
-        UIView.animate(withDuration: 0.6) {
-            self.signInButton.isHidden = true
+        UIView.animate(withDuration: 0.4, animations: {
+            self.signInButton.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.spinner.alpha = 1.0
             self.spinner.startAnimating()
-            self.errorLabel.isHidden = true
-            self.containerView.isHidden = true
-        }
+            self.errorLabel.alpha = 0
+            self.containerView.alpha = 0
+        })
     }
     
     // MARK: - UI Setup
     private func setupUI() {
-        // Configuración de la vista contenedora
         containerView.layer.cornerRadius = 10
         containerView.layer.masksToBounds = true
         containerView.layer.borderWidth = 1
@@ -120,12 +143,7 @@ final class LoginViewController: UIViewController {
         }
     }
     
-    // Elimina los observadores del teclado
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-}
-
-#Preview {
-    LoginBuilder().build()
 }

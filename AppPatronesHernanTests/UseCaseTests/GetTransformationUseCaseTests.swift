@@ -31,7 +31,7 @@ final class GetTransformationUseCaseTests: XCTestCase {
         let sut = GetTransformationUseCase()
         
         let expectation = self.expectation(description: "TestSuccess")
-        let transformation = Transformation(id: "2", name: "Super Namekian", description: "Piccolo's fusion form", photo: "piccolo_super_namekian.jpg")
+        let transformation = Transformation(id: "2", name: "Super Namekian", description: "Piccolo's fusion form", photo: "piccolo_super_namekian.jpg", hero: HeroId(id: "hero2"))
         
         let transformationsData: Data
         do {

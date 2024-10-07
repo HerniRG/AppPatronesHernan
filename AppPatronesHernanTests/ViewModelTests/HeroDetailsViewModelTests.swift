@@ -29,7 +29,7 @@ private final class SuccessGetTransformationUseCaseMock: GetTransformationUseCas
         if returnEmptyTransformations {
             completion(.success([]))
         } else {
-            let transformation = Transformation(id: "1", name: "Super Saiyan", description: "Goku's first transformation", photo: "ssj.jpg")
+            let transformation = Transformation(id: "1", name: "Super Saiyan", description: "Goku's first transformation", photo: "ssj.jpg", hero: HeroId(id: "hero1"))
             completion(.success([transformation]))
         }
     }

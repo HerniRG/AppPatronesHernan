@@ -62,24 +62,61 @@ final class TransformationListViewController: UIViewController, UITableViewDataS
     
     // MARK: - UI State Rendering
     private func renderError(_ reason: String) {
-        spinner.stopAnimating()
-        errorContainer.isHidden = false
-        tableView.isHidden = true
-        errorLabel.text = reason
+        UIView.animate(withDuration: 0.3, animations: {
+            self.spinner.alpha = 0.0
+        }) { _ in
+            self.spinner.stopAnimating()
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+            self.errorContainer.alpha = 1.0
+            self.tableView.alpha = 0.0
+        }, completion: { _ in
+            self.errorContainer.isHidden = false
+            self.tableView.isHidden = true
+            self.errorLabel.text = reason
+        })
     }
     
     private func renderLoading() {
-        spinner.startAnimating()
         errorContainer.isHidden = true
         tableView.isHidden = true
+        spinner.alpha = 0.0
+        spinner.startAnimating()
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.spinner.alpha = 1.0
+        })
     }
     
     private func renderSuccess() {
-        spinner.stopAnimating()
-        errorContainer.isHidden = true
-        tableView.isHidden = false
-        tableView.reloadData()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.spinner.alpha = 0.0
+        }) { _ in
+            self.spinner.stopAnimating()
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseInOut, animations: {
+            self.errorContainer.alpha = 0.0
+            self.tableView.alpha = 1.0
+        }) { _ in
+            self.errorContainer.isHidden = true
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+            
+            // Animación de fade-in para las celdas
+            let visibleCells = self.tableView.visibleCells
+            let tableViewHeight = self.tableView.bounds.size.height
+            
+            for (index, cell) in visibleCells.enumerated() {
+                cell.transform = CGAffineTransform(translationX: 0, y: tableViewHeight)
+                UIView.animate(withDuration: 0.6, delay: 0.05 * Double(index), usingSpringWithDamping: 0.8, initialSpringVelocity: 0.3, options: .curveEaseInOut, animations: {
+                    cell.transform = .identity
+                })
+            }
+        }
     }
+    
     
     // MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,12 +133,20 @@ final class TransformationListViewController: UIViewController, UITableViewDataS
             let transformation = viewModel.transformations[indexPath.row]
             cell.setAvatar(transformation.photo)
             cell.setHeroName(transformation.name)
-        }   
+        }
         return cell
     }
     
     // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(viewModel.transformations[indexPath.row])
+        
+        let selectedTransformation = viewModel.transformations[indexPath.row]
+        
+        // Llamar al builder para crear la pantalla de detalles de la transformación
+        let transformationDetailsViewController = TransformationDetailsBuilder(heroId: selectedTransformation.hero.id, transformationId: selectedTransformation.id).build()
+        
+        // Navegar al nuevo ViewController
+        self.navigationController?.pushViewController(transformationDetailsViewController, animated: true)
     }
+    
 }

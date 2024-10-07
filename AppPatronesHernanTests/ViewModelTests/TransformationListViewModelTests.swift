@@ -12,8 +12,8 @@ import XCTest
 private final class SuccessGetTransformationUseCaseMock: GetTransformationUseCaseContract {
     func execute(heroId: String, completion: @escaping (Result<[Transformation], Error>) -> Void) {
         let transformations = [
-            Transformation(id: "1", name: "Super Saiyan", description: "Goku's transformation", photo: "ssj.jpg"),
-            Transformation(id: "2", name: "Ultra Instinct", description: "Goku's ultimate form", photo: "ui.jpg")
+            Transformation(id: "1", name: "Super Saiyan", description: "Goku's transformation", photo: "ssj.jpg", hero: HeroId(id: "hero1")),
+            Transformation(id: "2", name: "Ultra Instinct", description: "Goku's ultimate form", photo: "ui.jpg", hero: HeroId(id: "hero2"))
         ]
         completion(.success(transformations))
     }
@@ -60,7 +60,7 @@ final class TransformationListViewModelTests: XCTestCase {
         sut.onStateChanged.bind { state in
             if state == .loading {
                 loadingExpectation.fulfill()
-            } else if case .error(let reason) = state {
+            } else if case .error(_) = state {
                 errorExpectation.fulfill()
             }
         }

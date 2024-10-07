@@ -6,9 +6,23 @@
 //
 
 // MARK: - Transformation Model
-struct Transformation: Codable, Hashable {
+struct Transformation: Codable {
     let id: String
     let name: String
     let description: String
     let photo: String
+    let hero: HeroId
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case description
+        case photo
+        case hero
+    }
+}
+
+// MARK: - HeroId Model (Simplificado)
+struct HeroId: Codable, Hashable {
+    let id: String
 }

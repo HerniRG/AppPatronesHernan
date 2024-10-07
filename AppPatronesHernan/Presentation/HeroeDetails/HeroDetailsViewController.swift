@@ -84,11 +84,18 @@ class HeroDetailsViewController: UIViewController {
     private func renderSuccess() {
         spinner.stopAnimating()
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
             self.updateHeroDetails()
+            
+            // Animamos la opacidad y el escalado de las vistas
             self.heroDescription.isHidden = false
             self.heroImage.isHidden = false
             self.transformationsButton.isHidden = false
+            
+            self.heroDescription.alpha = 1.0
+            self.heroImage.alpha = 1.0
+            self.transformationsButton.alpha = 1.0
+            self.heroImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
         
         UIView.animate(withDuration: 0.3) {
@@ -99,11 +106,19 @@ class HeroDetailsViewController: UIViewController {
     private func renderNoButton() {
         spinner.stopAnimating()
         
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.curveEaseInOut], animations: {
             self.updateHeroDetails()
+            
+            // Solo ocultamos el botón de transformaciones
             self.transformationsButton.isHidden = true
+            
+            // Animamos la opacidad y el escalado de las vistas
             self.heroDescription.isHidden = false
             self.heroImage.isHidden = false
+            
+            self.heroDescription.alpha = 1.0
+            self.heroImage.alpha = 1.0
+            self.heroImage.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
         
         UIView.animate(withDuration: 0.3) {
@@ -113,10 +128,19 @@ class HeroDetailsViewController: UIViewController {
     
     private func showLoadingState() {
         UIView.animate(withDuration: 0.3) {
+            // Ocultamos las vistas con opacidad
             self.heroDescription.isHidden = true
             self.heroImage.isHidden = true
             self.transformationsButton.isHidden = true
+            
+            self.heroDescription.alpha = 0.0
+            self.heroImage.alpha = 0.0
+            self.transformationsButton.alpha = 0.0
+            
+            // Reducimos el tamaño de la imagen mientras está oculta
+            self.heroImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }
         spinner.startAnimating()
     }
+    
 }
